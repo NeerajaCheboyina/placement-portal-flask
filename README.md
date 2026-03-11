@@ -16,6 +16,15 @@ A role-based web application built using Flask that helps institutes manage camp
 - Jinja2
 - Bootstrap
 
+## Project Structure
+
+placement-portal-flask
+│
+├── templates/      # HTML templates
+├── app.py          # Main Flask application
+├── models.py       # Database models
+└── README.md
+
 ## Run Locally
 
 1. Clone the repository

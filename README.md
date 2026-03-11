@@ -19,11 +19,10 @@ A role-based web application built using Flask that helps institutes manage camp
 ## Project Structure
 
 placement-portal-flask
-│
-├── templates/      # HTML templates
-├── app.py          # Main Flask application
-├── models.py       # Database models
-└── README.md
+- templates/      # HTML templates
+- app.py          # Main Flask application
+- models.py       # Database models
+- README.md
 
 ## Run Locally
 

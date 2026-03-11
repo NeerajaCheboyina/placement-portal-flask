@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+<h2>Edit Placement Drive</h2>
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Job Title</label>
+<input type="text" name="job_title"
+value="{{ drive.job_title }}"
+class="form-control" required>
+</div>
+
+<div class="mb-3">
+<label>Description</label>
+<textarea name="job_description"
+class="form-control">{{ drive.job_description }}</textarea>
+</div>
+
+<div class="mb-3">
+<label>Eligibility</label>
+<input type="text" name="eligibility"
+value="{{ drive.eligibility }}"
+class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Deadline</label>
+<input type="date" name="deadline"
+value="{{ drive.deadline }}"
+class="form-control">
+</div>
+
+<button class="btn btn-primary w-100">
+Update Drive
+</button>
+
+</form>
+
+<a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary mt-3">
+Back
+</a>
+
+</div>
+
+{% endblock %}

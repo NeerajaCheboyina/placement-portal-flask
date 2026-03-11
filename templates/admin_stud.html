@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">All Students</h2>
+
+<form method="GET" class="mb-3 d-flex">
+
+<input type="text"
+name="search"
+class="form-control me-2"
+placeholder="Search student by name"
+value="{{ request.args.get('search','') }}">
+
+<button class="btn btn-primary me-2">Search</button>
+
+<a href="{{ url_for('view_students') }}" class="btn btn-secondary">
+Clear
+</a>
+
+</form>
+
+<div class="card p-3 mb-4">
+
+{% if students %}
+
+<table class="table table-striped table-hover">
+
+<thead class="table-dark">
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Branch</th>
+<th>CGPA</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for student in students %}
+
+<tr>
+
+<td>{{ student.name }}</td>
+
+<td>{{ student.user.email }}</td>
+
+<td>{{ student.branch }}</td>
+
+<td>{{ student.cgpa }}</td>
+
+<td>{{ student.user.status }}</td>
+
+<td>
+
+{% if student.user.status != "Blacklisted" %}
+
+<a class="btn btn-danger btn-sm"
+href="{{ url_for('block_user', user_id=student.user.id) }}">
+Block
+</a>
+
+{% else %}
+
+<a class="btn btn-success btn-sm"
+href="{{ url_for('unblock_user', user_id=student.user.id) }}">
+Unblock
+</a>
+
+{% endif %}
+
+<a class="btn btn-dark btn-sm"
+href="{{ url_for('delete_student', student_id=student.id) }}">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+No students available.
+</div>
+
+{% endif %}
+
+</div>
+
+<a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+Back
+</a>
+
+{% endblock %}

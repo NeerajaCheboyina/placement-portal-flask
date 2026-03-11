@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('student_dashboard') }}" class="btn btn-secondary mb-3">
+Back to Dashboard
+</a>
+
+<h2 class="page-title">Available Placement Drives</h2>
+
+<table class="table table-striped table-hover">
+
+<thead class="table-dark">
+<tr>
+<th>Company</th>
+<th>Job Title</th>
+<th>Eligibility</th>
+<th>Deadline</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{ drive.company.company_name }}</td>
+
+<td>{{ drive.job_title }}</td>
+
+<td>{{ drive.eligibility }}</td>
+
+<td>{{ drive.deadline }}</td>
+
+<td>
+
+{% if drive.id in applied_drives %}
+
+<span class="badge bg-secondary">Applied</span>
+
+{% elif drive.deadline < today %}
+
+<span class="badge bg-danger">Deadline Passed</span>
+
+{% else %}
+
+{% if drive.id in applied_drives %}
+
+<span class="badge bg-secondary">Applied</span>
+
+{% elif student.cgpa < drive.eligibility %}
+
+<span class="badge bg-danger">Not Eligible</span>
+
+{% elif drive.deadline < today %}
+
+<span class="badge bg-warning">Deadline Passed</span>
+
+{% else %}
+
+<a class="btn btn-success btn-sm"
+href="{{ url_for('apply_drive', drive_id=drive.id) }}">
+Apply
+</a>
+
+{% endif %}
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

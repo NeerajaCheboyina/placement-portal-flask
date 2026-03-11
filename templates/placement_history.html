@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="page-title">Placement History</h2>
+
+<a href="{{ url_for('student_dashboard') }}" class="btn btn-secondary mb-3">
+Back to Dashboard
+</a>
+
+<div class="card">
+
+<table class="table">
+
+<tr>
+<th>Company</th>
+<th>Job Title</th>
+<th>Status</th>
+</tr>
+
+{% if applications %}
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{ app.drive.company.company_name }}</td>
+
+<td>{{ app.drive.job_title }}</td>
+
+<td>
+<span class="badge bg-success">Selected</span>
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+<td colspan="3">No placements yet.</td>
+</tr>
+
+{% endif %}
+
+</table>
+
+</div>
+
+{% endblock %}

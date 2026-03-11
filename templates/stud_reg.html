@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+<h2>Student Registration</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+<input type="text" name="name" class="form-control" placeholder="Full Name" required>
+</div>
+
+<div class="mb-3">
+<input type="email" name="email" class="form-control" placeholder="Email" required>
+</div>
+
+<div class="mb-3">
+<input type="password" name="password" class="form-control" placeholder="Password" required>
+</div>
+
+<div class="mb-3">
+<label>Branch</label>
+<input type="text" name="branch" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>CGPA</label>
+<input type="number" step="0.01" name="cgpa" class="form-control">
+</div>
+
+<div class="mb-3">
+<label>Year</label>
+<input type="text" name="year" class="form-control">
+</div>
+
+<div class="mb-3">
+<input type="tel" name="contact" class="form-control" placeholder="Contact Number">
+</div>
+
+<div class="mb-3">
+<label>Upload Resume (PDF)</label>
+<input type="file" name="resume" class="form-control" accept=".pdf">
+</div>
+
+<button type="submit" class="btn btn-success w-100">
+Register
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

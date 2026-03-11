@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+<div class="text-center mb-5">
+
+<h1 class="fw-bold">
+🏢 Welcome {{ company.company_name }} !
+</h1>
+
+<p class="text-muted fs-5">
+Manage your placement drives here.
+</p>
+
+</div>
+
+
+<div class="row text-center mb-4">
+
+<div class="col-md-3">
+<div class="card">
+<h5>Total Drives</h5>
+<h3>{{ total_drives }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card">
+<h5>Total Applications</h5>
+<h3>{{ total_applications }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card">
+<h5>Approved Drives</h5>
+<h3>{{ approved_drives }}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card">
+<h5>Pending Drives</h5>
+<h3>{{ pending_drives }}</h3>
+</div>
+</div>
+
+</div>
+
+<hr class="my-4">
+
+<div class="row text-center mb-5">
+
+<div class="col-md-4">
+<a class="btn btn-primary w-100"
+href="{{ url_for('create_drive') }}">
+Create Placement Drive
+</a>
+</div>
+
+<div class="col-md-4">
+<a class="btn btn-secondary w-100"
+href="{{ url_for('company_applications') }}">
+View Applications
+</a>
+</div>
+
+<div class="col-md-4">
+<a class="btn btn-warning w-100"
+href="{{ url_for('edit_company_profile') }}">
+Edit Company Profile
+</a>
+</div>
+
+</div>
+
+<h4 class="text-center mb-4">Your Placement Drives</h4>
+
+<div class="card p-3">
+
+<table class="table">
+
+<thead class="table-light">
+
+<tr>
+<th>Job Title</th>
+<th>Eligibility</th>
+<th>Deadline</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% if drives %}
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{ drive.job_title }}</td>
+
+<td>{{ drive.eligibility }}</td>
+
+<td>{{ drive.deadline }}</td>
+
+<td>{{ drive.status }}</td>
+
+<td>
+
+<a class="btn btn-warning btn-sm"
+href="{{ url_for('edit_drive', drive_id=drive.id) }}">
+Edit
+</a>
+
+<a class="btn btn-danger btn-sm"
+href="{{ url_for('delete_drive', drive_id=drive.id) }}">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+<td colspan="5" class="text-center text-muted">
+No placement drives created yet.
+</td>
+</tr>
+
+{% endif %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

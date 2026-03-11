@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">All Placement Drives</h2>
+
+<form method="GET" class="mb-3 d-flex">
+
+<input type="text"
+name="search"
+class="form-control me-2"
+placeholder="Search job title"
+value="{{ request.args.get('search','') }}">
+
+<button class="btn btn-primary me-2">Search</button>
+
+<a href="{{ url_for('view_drives') }}" class="btn btn-secondary">
+Clear
+</a>
+
+</form>
+
+<div class="card p-3 mb-4">
+
+{% if drives %}
+
+<table class="table table-striped table-hover">
+
+<thead class="table-dark">
+<tr>
+<th>Company</th>
+<th>Job Title</th>
+<th>Eligibility</th>
+<th>Deadline</th>
+<th>Applications</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{ drive.company.company_name }}</td>
+
+<td>{{ drive.job_title }}</td>
+
+<td>{{ drive.eligibility }}</td>
+
+<td>{{ drive.deadline }}</td>
+
+<td>
+{% if drive.status == "Approved" %}
+{{ drive.applications|length }}
+{% else %}
+-
+{% endif %}
+</td>
+
+<td>
+
+{% if drive.status == "Pending" %}
+
+<a class="btn btn-success btn-sm"
+href="{{ url_for('approve_drive', drive_id=drive.id) }}">
+Approve
+</a>
+
+<a class="btn btn-danger btn-sm"
+href="{{ url_for('reject_drive', drive_id=drive.id) }}">
+Reject
+</a>
+
+{% elif drive.status == "Rejected" %}
+
+<span class="text-danger">Rejected</span>
+
+{% elif drive.status == "Closed" %}
+
+<span class="text-secondary">Closed</span>
+
+{% else %}
+
+<span class="text-success">Approved</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+No drives available.
+</div>
+
+{% endif %}
+
+</div>
+
+<a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+Back
+</a>
+
+{% endblock %}

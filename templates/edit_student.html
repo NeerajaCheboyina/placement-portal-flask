@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+<h2>Edit Profile</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="mb-3">
+<label>Name</label>
+<input type="text" name="name" class="form-control"
+value="{{ student.name }}" required>
+</div>
+
+<div class="mb-3">
+<label>Contact</label>
+<input type="text" name="contact" class="form-control"
+value="{{ student.contact }}">
+</div>
+
+<div class="mb-3">
+<label>Branch</label>
+<input type="text" name="branch" class="form-control"
+value="{{ student.branch }}">
+</div>
+
+<div class="mb-3">
+<label>CGPA</label>
+<input type="number" step="0.01" name="cgpa"
+class="form-control"
+value="{{ student.cgpa }}">
+</div>
+
+<div class="mb-3">
+<label>Year</label>
+<input type="text" name="year" class="form-control"
+value="{{ student.year }}">
+</div>
+
+<div class="mb-3">
+<label>Upload New Resume</label>
+<input type="file" name="resume" class="form-control">
+</div>
+
+<button class="btn btn-success w-100">
+Update Profile
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

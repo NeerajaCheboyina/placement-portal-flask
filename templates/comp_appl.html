@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('company_dashboard') }}" class="btn btn-secondary mb-3">
+Back to Dashboard
+</a>
+
+<h2 class="mb-4">Applications Received</h2>
+
+{% if applications %}
+
+<table class="table table-striped table-hover">
+
+<thead class="table-secondary">
+<tr>
+<th>Student</th>
+<th>Drive</th>
+<th>Resume</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for application in applications %}
+
+<tr>
+
+<td>{{ application.student.name }}</td>
+
+<td>{{ application.drive.job_title }}</td>
+
+<td>
+<a href="{{ url_for('static', filename='resumes/' + application.resume_file) }}">
+View Resume
+</a>
+</td>
+
+<td>
+
+{% if application.status == "Selected" %} <span class="badge bg-success">Selected</span>
+
+{% elif application.status == "Rejected" %} <span class="badge bg-danger">Rejected</span>
+
+{% else %} <span class="badge bg-secondary">Applied</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if application.status == "Applied" %}
+
+<a class="btn btn-success btn-sm"
+href="{{ url_for('update_application', app_id=application.id, action='select') }}">
+Select </a>
+
+<a class="btn btn-danger btn-sm"
+href="{{ url_for('update_application', app_id=application.id, action='reject') }}">
+Reject </a>
+
+{% else %}
+
+<span class="text-muted">Finalized</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<div class="card p-4 text-center">
+<div class="alert alert-info">
+No applications received yet.
+</div>
+</div>
+
+{% endif %}
+
+{% endblock %}
